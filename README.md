@@ -12,7 +12,11 @@ Sample URLs and corresponding files loaded shown below:
 * 'example.com/' : content/index.md
 * 'example.com/index.php?page=page1': content/page1.md
 * 'example.com/index.php?page=page2': content/page2/index.md
-* 'example.com/index.php?page=page2/a': content/page2/a.md
+* 'example.com/index.php?page=page2/a': content/page2/a.md*
+
+* - not tested yet
+ 
+---
 
 ## Styling
 Groot CMS comes with no bootstrap, angular, material design, framework, twig, leaf, bells, whistles, infinity stones, whatever. But we have theme support already and engine would come with it's own .css theme that should be adjusted properly.
