@@ -19,4 +19,4 @@ Groot CMS comes with no bootstrap, angular, material design, framework, twig, le
 
 ---
 
-**Soon would be available**
+**Soon would be available. TBA.**
