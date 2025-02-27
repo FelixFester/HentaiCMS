@@ -18,3 +18,7 @@ Download latest version from releases. Unpack in your website folder and done!
 
 ---
 
+**Have a question?**
+- [Telegram channel](https://t.me/+fgCDiyU802s1NWZi) (mainly Russian)
+- [Instagram](https://instagram.com/felixfester) (mainly English / Russian)
+- QQ chat group ID: 195194950 (mainly English / Chinese)
