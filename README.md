@@ -22,6 +22,12 @@ You can also just download whole repository as .zip file, but keep in mind what 
 
 ---
 
+# Requirements
+- PHP.
+- Preferably Nginx. But you may try Apache or anything else, but 100% work here is not guaranteed.
+
+---
+
 **Have a question?**
 - [Telegram channel](https://t.me/+fgCDiyU802s1NWZi) (mainly Russian)
 - [Instagram](https://instagram.com/felixfester) (mainly English / Russian)
