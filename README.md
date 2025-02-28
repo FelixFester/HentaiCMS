@@ -22,7 +22,7 @@ You can also just download whole repository as .zip file, but keep in mind what 
 
 # Requirements
 - PHP.
-- Preferably Nginx. But you may try Apache or anything else, but 100% work here is not guaranteed.
+- Preferably Nginx. You may try Apache or anything else, but 100% work here is not guaranteed.
 
 ---
 
