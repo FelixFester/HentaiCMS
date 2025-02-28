@@ -20,8 +20,6 @@ Download latest version from releases. Unpack in your website folder and done!
 
 You can also just download whole repository as .zip file, but keep in mind what changes here might be quite unstable. Or not.
 
----
-
 # Requirements
 - PHP.
 - Preferably Nginx. But you may try Apache or anything else, but 100% work here is not guaranteed.
