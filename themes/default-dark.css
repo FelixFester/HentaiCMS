@@ -87,3 +87,31 @@ pre code {
     color: #ecf0f1; /* Light text for contrast */
     border-radius: 8px; /* Rounded corners */
 }
+
+/* Style for echo-content messages */
+.echo-content {
+    max-width: 100%; /* Full width on small screens */
+    width: 600px; /* Default width */
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.9); /* Dark background with slight transparency */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Darker shadow for depth */
+    text-align: center;
+    animation: fadeIn 0.4s ease-in-out;
+    backdrop-filter: blur(8px); /* macOS-like frosted glass effect */
+}
+
+@media (max-width: 768px) {
+    .echo-content {
+        width: 90%; /* Tablet Screens */
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .echo-content {
+        width: 95%; /* Mobile Screens */
+        padding: 1rem;
+    }
+}
