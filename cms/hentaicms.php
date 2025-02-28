@@ -1,53 +1,76 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
+global $themeFileForHentaiCMS;
+
+// Special theme detection for system pages
+if (isset($_COOKIE['hentaicms_theme'])) {
+    $themeFileForHentaiCMS = '../themes/' . $_COOKIE['hentaicms_theme'];
+} else {
+    $themeFileForHentaiCMS = '../themes/default.css'; // Special fallback
+}
+
 include 'Parsedown.php';
 $Parsedown = new Parsedown();
 
-// Maintenance mode flag
-$maintenanceMode = false; // Set this to true to enable maintenance mode
+// Security: Block direct access to core PHP files
+$requestedFile = $_SERVER['REQUEST_URI'];
+if (preg_match('/\/cms\/.*\.php$/i', $requestedFile)) {
+    echo '<meta charset="UTF-8">';
+    echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+    echo '<link rel="stylesheet" href="' . htmlspecialchars($themeFileForHentaiCMS) . '">';
+    echo '<div class="echo-content"><h1>What are you trying to find here?</h1></div>';
+    exit();
+}
 
-// If maintenance mode is enabled, redirect to the maintenance page
+// Maintenance mode
+$maintenanceMode = false;
+
 if ($maintenanceMode) {
-    $maintenancePage = 'content/maintenance.md'; // Path to your maintenance page
+    $maintenancePage = 'content/maintenance.md';
     if (file_exists($maintenancePage)) {
         $content = fopen($maintenancePage, 'r') or die('File Open Error');
+        echo '<meta charset="UTF-8">';
+        echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+        echo '<link rel="stylesheet" href="' . htmlspecialchars($themeFileForHentaiCMS) . '">';
         echo '<div class="markdown-content">' . $Parsedown->text(fread($content, filesize($maintenancePage))) . '</div>';
         fclose($content);
-        exit(); // Stop further execution
+        exit();
     } else {
-        echo '<h1>Maintenance Mode</h1><p>The site is currently under maintenance. Please check back later.</p>';
-        exit(); // Stop further execution
+        echo '<meta charset="UTF-8">';
+        echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+        echo '<link rel="stylesheet" href="' . htmlspecialchars($themeFileForHentaiCMS) . '">';
+        echo '<div class="echo-content"><h1>Maintenance Mode</h1><p>The site is currently under maintenance. Please check back later.</p></div>';
+        exit();
     }
 }
 
-// Get the page from query parameter or default to 'home'
 $page = isset($_GET['page']) ? trim($_GET['page'], '/ ') : 'home';
-
-// Define paths for .md files
 $path1 = 'content/' . $page . '/index.md';
 $path2 = 'content/' . $page . '.md';
 
-// Check if the markdown file exists and render it
-if ($page === 'home') {
-    // Check for index.md on the homepage
-    $homePath = 'content/index.md';
-    if (file_exists($homePath)) {
-        $content = fopen($homePath, 'r') or die('File Open Error');
-        echo '<div class="markdown-content">' . $Parsedown->text(fread($content, filesize($homePath))) . '</div>';
-        fclose($content);
-    } else {
-        echo '<h1>404 - Page Not Found</h1>';
-    }
+function hentaiShowMarkdown($path) {
+    global $Parsedown, $themeFileForHentaiCMS;
+    echo '<meta charset="UTF-8">';
+    echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+    echo '<link rel="stylesheet" href="' . htmlspecialchars($themeFileForHentaiCMS) . '">';
+    $content = fopen($path, 'r') or die('File Open Error');
+    echo '<div class="markdown-content">' . $Parsedown->text(fread($content, filesize($path))) . '</div>';
+    fclose($content);
+}
+
+if ($page === 'home' && file_exists('content/index.md')) {
+    hentaiShowMarkdown('content/index.md');
 } elseif (file_exists($path1)) {
-    // Handle nested page paths like 'content/about/index.md'
-    $content = fopen($path1, 'r') or die('File Open Error');
-    echo '<div class="markdown-content">' . $Parsedown->text(fread($content, filesize($path1))) . '</div>';
-    fclose($content);
+    hentaiShowMarkdown($path1);
 } elseif (file_exists($path2)) {
-    // Handle simple page paths like 'content/about.md'
-    $content = fopen($path2, 'r') or die('File Open Error');
-    echo '<div class="markdown-content">' . $Parsedown->text(fread($content, filesize($path2))) . '</div>';
-    fclose($content);
+    hentaiShowMarkdown($path2);
 } else {
-    echo '<h1>404 - Page Not Found</h1>';
+    echo '<meta charset="UTF-8">';
+    echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+    echo '<link rel="stylesheet" href="' . htmlspecialchars($themeFileForHentaiCMS) . '">';
+    echo '<div class="echo-content"><h1>404 - Page Not Found</h1></div>';
 }
 ?>
