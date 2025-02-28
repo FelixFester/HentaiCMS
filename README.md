@@ -17,6 +17,8 @@ Sample URLs and corresponding files loaded shown below:
 ## Installation
 Download latest version from releases. Unpack in your website folder and done!
 
+You can also just download whole repository as .zip file, but keep in mind what changes here might be quite unstable. Or not.
+
 ---
 
 **Have a question?**
