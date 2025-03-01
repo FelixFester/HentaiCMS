@@ -21,7 +21,6 @@ To get all latest updates, just download code as .zip archive from GitHub, unpac
 # Requirements
 - PHP.
 - Nginx. You may try Apache or anything else, but 100% work here is not guaranteed.
-- Engine must be in root path of your website, otherwise, it will not work.
 
 ---
 
