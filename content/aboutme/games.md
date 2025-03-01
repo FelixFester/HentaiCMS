@@ -42,5 +42,3 @@ _OMG! Lorem ipsum odor amet, consectetuer adipiscing elit. Est ullamcorper variu
 ## Cras inceptos mi augue faucibus proin ut placerat. Pellentesque odio eget sit a dolor litora neque dignissim. Aptent curabitur nec phasellus mus sodales risus platea. Litora urna volutpat congue eleifend lobortis tristique tristique id. Natoque laoreet justo, ligula dapibus pharetra fermentum bibendum. Faucibus blandit platea tincidunt dignissim, parturient posuere phasellus varius. Curabitur condimentum aptent diam potenti tortor duis feugiat ac lacus. Varius elit ad nostra egestas convallis dictumst commodo.
 
 ----
-
-Powered by [Hentai CMS](https://github.com/FelixFester/HentaiCMS).
