@@ -1,13 +1,13 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
 
 $themes = array_filter(scandir('themes'), function ($file) {
     return pathinfo($file, PATHINFO_EXTENSION) === 'css';
 });
 
-$defaultTheme = 'hentaiOS Black.css';
+$defaultTheme = 'default.css';
 $currentTheme = isset($_COOKIE['hentaicms_theme']) ? htmlspecialchars($_COOKIE['hentaicms_theme']) : $defaultTheme;
 ?>
 <!DOCTYPE html>
@@ -50,8 +50,6 @@ $currentTheme = isset($_COOKIE['hentaicms_theme']) ? htmlspecialchars($_COOKIE['
             <button onclick="restoreDefault()">Restore Default</button>
             <button onclick="window.location.href='index.php'">Go Back to Main Page</button>
             <br>
-          <br>
-         <img src="https://media1.tenor.com/m/hsg1mI3sr6cAAAAC/azumanga-daioh-anime.gif" alt="Tsukurimashou, tsukurimashou, sate sate nani ga dekiru ga na! Hai, dekimashita!" />
         </div>
     </div>
 </body>
