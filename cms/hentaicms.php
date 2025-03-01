@@ -50,7 +50,7 @@ if (empty($themes)) {
 }
 
 // Default theme
-$defaultTheme = 'hentaiOS Black.css';
+$defaultTheme = 'default.css';
 $defaultThemePath = '/themes/' . $defaultTheme; // Relative URL for the default theme
 
 // Cookie-based theme selection
