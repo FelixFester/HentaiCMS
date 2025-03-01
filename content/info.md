@@ -15,5 +15,3 @@ If you have any more questions, feel free to go to GitHub and find here link to 
 ### 💀
 
 ----
-
-Powered by [Hentai CMS](https://github.com/FelixFester/HentaiCMS).

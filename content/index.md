@@ -26,8 +26,3 @@ _markdown is fun!_
 ~~sample text~~
 
 ----
-
-**your footer**
-
-
-Powered by [Hentai CMS](https://github.com/FelixFester/HentaiCMS).
