@@ -16,13 +16,12 @@ Sample URLs and corresponding files loaded shown below:
 * 'example.com/index.php?page=aboutme/games': content/aboutme/games.md
 
 ## Installation
-Download latest version from releases. Unpack in your website folder and done!
-
-You can also just download whole repository as .zip file, but keep in mind what changes here might be quite unstable. Or not.
+To get all latest updates, just download code as .zip archive from GitHub, unpack in root folder of your website and done!
 
 # Requirements
 - PHP.
 - Nginx. You may try Apache or anything else, but 100% work here is not guaranteed.
+- Engine must be in root path of your website, otherwise, it will not work.
 
 ---
 
