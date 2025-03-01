@@ -10,15 +10,13 @@ $documentRoot = $_SERVER['DOCUMENT_ROOT']; // Web server's document root (e.g., 
 
 // If the script is in a subdirectory (e.g., /www/cms), adjust the root directory
 if (strpos($scriptPath, $documentRoot) === 0) {
-    // Use the document root as the base directory
     define('ROOT_DIR', $documentRoot);
 } else {
-    // Fallback to script directory (if document root is not available)
     define('ROOT_DIR', $scriptPath);
 }
 
 // Define the themes directory
-define('THEMES_DIR', ROOT_DIR . '/themes'); // Full path to the themes directory
+define('THEMES_DIR', ROOT_DIR . '/themes');
 
 // Security: Ensure the 'themes' directory exists and is readable
 if (!file_exists(THEMES_DIR) || !is_dir(THEMES_DIR)) {
@@ -28,7 +26,7 @@ if (!file_exists(THEMES_DIR) || !is_dir(THEMES_DIR)) {
     exit();
 }
 
-// Detect available themes from the 'themes' folder
+// Detect available themes
 $themes = scandir(THEMES_DIR);
 if ($themes === false) {
     hentaiHeader($defaultThemePath);
@@ -41,7 +39,6 @@ $themes = array_filter($themes, function ($file) {
     return pathinfo($file, PATHINFO_EXTENSION) === 'css';
 });
 
-// Security: Check if themes directory is empty
 if (empty($themes)) {
     hentaiHeader($defaultThemePath);
     echo '<div class="echo-content"><h1>Add some themes in "themes" folder already!</h1></div>';
@@ -51,13 +48,13 @@ if (empty($themes)) {
 
 // Default theme
 $defaultTheme = 'default.css';
-$defaultThemePath = '/themes/' . $defaultTheme; // Relative URL for the default theme
+$defaultThemePath = '/themes/' . $defaultTheme;
 
 // Cookie-based theme selection
 if (isset($_COOKIE['hentaicms_theme']) && in_array($_COOKIE['hentaicms_theme'], $themes)) {
-    $themeFileForHentaiCMS = '/themes/' . $_COOKIE['hentaicms_theme']; // Relative URL for the selected theme
+    $themeFileForHentaiCMS = '/themes/' . $_COOKIE['hentaicms_theme'];
 } else {
-    $themeFileForHentaiCMS = $defaultThemePath; // Fallback to default theme
+    $themeFileForHentaiCMS = $defaultThemePath;
 }
 
 // Include the header with the theme
@@ -72,7 +69,7 @@ function hentaiFooter() {
     echo '<div class="footer"><p>' . htmlspecialchars(getFooterText(), ENT_QUOTES, 'UTF-8') . '</p></div>';
 }
 
-// Footer text (touch the grass before changing it or add your own text footer but keep name of engine)
+// Footer text (touch the grass before changing, but seriously, respect the efforts and add your own text, while keeping name of engine)
 function getFooterText() {
     return 'Powered by Hentai CMS';
 }
@@ -84,20 +81,31 @@ $Parsedown = new Parsedown();
 // Block direct access to hentaicms.php
 $requestedFile = $_SERVER['REQUEST_URI'];
 if (preg_match('/\/cms\/hentaicms\.php$/i', $requestedFile)) {
-    hentaiHeader($themeFileForHentaiCMS); // Ensure the theme is applied
+    hentaiHeader($themeFileForHentaiCMS);
     echo '<div class="echo-content"><h1>What are you trying to find here?</h1></div>';
     hentaiFooter();
     exit();
 }
 
-// Sanitize the 'page' parameter to prevent directory traversal
+// Sanitize the 'page' parameter
 $page = isset($_GET['page']) ? trim($_GET['page'], '/ ') : 'home';
-$safePage = preg_replace('/[^a-zA-Z0-9\-\/]/', '', $page); // Allow only letters, numbers, hyphens, and slashes
+$safePage = preg_replace('/[^a-zA-Z0-9\-\/]/', '', $page);
 
 // Define paths for markdown files
-$contentDir = ROOT_DIR . '/content'; // Correct path to content directory
+$contentDir = ROOT_DIR . '/content';
 $path1 = $contentDir . '/' . $safePage . '/index.md';
 $path2 = $contentDir . '/' . $safePage . '.md';
+
+// Check for maintenance mode
+$maintenanceFile = $contentDir . '/maintenance.md';
+$maintenanceEnabled = false;
+
+if (file_exists($maintenanceFile)) {
+    $maintenanceContent = file_get_contents($maintenanceFile);
+    if (trim($maintenanceContent) === 'true') {
+        $maintenanceEnabled = true;
+    }
+}
 
 // Function to render markdown content
 function hentaiShowMarkdown($path, $themeFileForHentaiCMS) {
@@ -106,7 +114,7 @@ function hentaiShowMarkdown($path, $themeFileForHentaiCMS) {
         $content = file_get_contents($path);
         if (empty(trim($content))) {
             hentaiHeader($themeFileForHentaiCMS);
-            echo '<div class="echo-content"><h1>Did you made empty index.md page in "content" folder or what?</h1></div>';
+            echo '<div class="echo-content"><h1>Did you make an empty index.md page in "content" folder or what?</h1></div>';
             hentaiFooter();
         } else {
             hentaiHeader($themeFileForHentaiCMS);
@@ -120,23 +128,28 @@ function hentaiShowMarkdown($path, $themeFileForHentaiCMS) {
     }
 }
 
-// Handle home page or specific pages
-if ($safePage === 'home') {
-    $homePagePath = $contentDir . '/index.md';
-    if (file_exists($homePagePath)) {
-        hentaiShowMarkdown($homePagePath, $themeFileForHentaiCMS);
+// If maintenance mode is enabled, show the maintenance page
+if ($maintenanceEnabled) {
+    hentaiShowMarkdown($maintenanceFile, $themeFileForHentaiCMS);
+} else {
+    // Handle home page or specific pages
+    if ($safePage === 'home') {
+        $homePagePath = $contentDir . '/index.md';
+        if (file_exists($homePagePath)) {
+            hentaiShowMarkdown($homePagePath, $themeFileForHentaiCMS);
+        } else {
+            hentaiHeader($themeFileForHentaiCMS);
+            echo '<div class="echo-content"><h1>Where is index.md page in "content" folder?</h1></div>';
+            hentaiFooter();
+        }
+    } elseif (file_exists($path1)) {
+        hentaiShowMarkdown($path1, $themeFileForHentaiCMS);
+    } elseif (file_exists($path2)) {
+        hentaiShowMarkdown($path2, $themeFileForHentaiCMS);
     } else {
         hentaiHeader($themeFileForHentaiCMS);
-        echo '<div class="echo-content"><h1>Where is index.md page in "content" folder?</h1></div>';
+        echo '<div class="echo-content"><h1>404 - Page Not Found</h1></div>';
         hentaiFooter();
     }
-} elseif (file_exists($path1)) {
-    hentaiShowMarkdown($path1, $themeFileForHentaiCMS);
-} elseif (file_exists($path2)) {
-    hentaiShowMarkdown($path2, $themeFileForHentaiCMS);
-} else {
-    hentaiHeader($themeFileForHentaiCMS);
-    echo '<div class="echo-content"><h1>404 - Page Not Found</h1></div>';
-    hentaiFooter();
 }
 ?>
