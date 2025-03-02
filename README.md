@@ -8,7 +8,7 @@ Flat-file PHP engine that using .md files to show them as pages.
 - Nginx-friendly! All pages is being opened through index.php, so it's suitable for absolutely every nginx server, including the most capricious nginx servers where you cannot use permalinks like yourwebsite.com/mypage.
 - Perfect and lightweight! Engine was tested on PHP 8.2 and works greatly here!
 
-## Test it out!
+## Demo is available!
 Just open my website to test how everything works.
 If it doesn't work for some reason, proceed to [this link](http://odx2ph65wugyzadayk2boq6u5dwq3t7eewxaadgxbpzudc3alkbo3xid.onion/index.php) (Tor)
 
