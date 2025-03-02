@@ -8,7 +8,7 @@ ini_set('display_startup_errors', 0);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Felix's Corner</title>
+  <title>Your website name</title>
 </head>
 <body>
   <?php include 'cms/hentaicms.php'; ?>
