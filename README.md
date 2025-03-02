@@ -9,8 +9,7 @@ Flat-file PHP engine that using .md files to show them as pages.
 - Perfect and lightweight! Engine was tested on PHP 8.2 and works greatly here!
 
 ## Demo is available!
-Just open my website to test how everything works.
-If it doesn't work for some reason, proceed to [this link](http://odx2ph65wugyzadayk2boq6u5dwq3t7eewxaadgxbpzudc3alkbo3xid.onion/index.php) (Tor)
+Just [open my website](https://telegra.ph/How-to-access-my-website-03-02) to test how everything works.
 
 ## How to add content?
 Write your content as markdown files in the 'content' folder.
