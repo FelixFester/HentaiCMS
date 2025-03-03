@@ -19,7 +19,7 @@ Sample URLs and corresponding files loaded shown below:
 * 'example.com/index.php?page=aboutme/games': content/aboutme/games.md
 
 ## Installation
-To get all latest updates, just download code as .zip archive from GitHub, unpack in root folder of your website and done!
+To get all latest updates, just download code as .zip archive from GitHub, unpack in folder of your website and done!
 
 # Requirements
 - PHP.
