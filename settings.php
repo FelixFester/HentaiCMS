@@ -16,6 +16,7 @@ $currentTheme = isset($_COOKIE['hentaicms_theme']) ? htmlspecialchars($_COOKIE['
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings</title>
+    <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css">
     <link id="themeCSS" rel="stylesheet" href="themes/<?php echo $currentTheme; ?>">
     <script>
         function changeTheme(theme) {
