@@ -1,5 +1,5 @@
 <?php
-// Enable error reporting
+// Enable error reporting for debugging
 error_reporting(0);
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
@@ -20,7 +20,7 @@ define('THEMES_DIR', ROOT_DIR . '/themes');
 
 // Security: Ensure the 'themes' directory exists and is readable
 if (!file_exists(THEMES_DIR) || !is_dir(THEMES_DIR)) {
-    hentaiHeader($defaultThemePath);
+    hentaiHeader();
     echo '<div class="echo-content"><h1>Where is "themes" directory?</h1></div>';
     hentaiFooter();
     exit();
@@ -29,7 +29,7 @@ if (!file_exists(THEMES_DIR) || !is_dir(THEMES_DIR)) {
 // Detect available themes
 $themes = scandir(THEMES_DIR);
 if ($themes === false) {
-    hentaiHeader($defaultThemePath);
+    hentaiHeader();
     echo '<div class="echo-content"><h1>Sorry, but I cannot scan "themes" folder.</h1></div>';
     hentaiFooter();
     exit();
@@ -40,7 +40,7 @@ $themes = array_filter($themes, function ($file) {
 });
 
 if (empty($themes)) {
-    hentaiHeader($defaultThemePath);
+    hentaiHeader();
     echo '<div class="echo-content"><h1>Add some themes in "themes" folder already!</h1></div>';
     hentaiFooter();
     exit();
@@ -57,11 +57,13 @@ if (isset($_COOKIE['hentaicms_theme']) && in_array($_COOKIE['hentaicms_theme'], 
     $themeFileForHentaiCMS = $defaultThemePath;
 }
 
-// Include the header with the theme
-function hentaiHeader($themeFileForHentaiCMS) {
+// Header
+function hentaiHeader() {
+    global $themeFileForHentaiCMS;
     echo '<meta charset="UTF-8">';
     echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
-    echo '<link rel="stylesheet" href="' . htmlspecialchars($themeFileForHentaiCMS, ENT_QUOTES, 'UTF-8') . '">';
+    echo '<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css">'; 
+    echo '<link rel="stylesheet" href="' . htmlspecialchars($themeFileForHentaiCMS, ENT_QUOTES, 'UTF-8') . '">'; 
 }
 
 // Footer function
@@ -69,7 +71,7 @@ function hentaiFooter() {
     echo '<div class="footer"><p>' . htmlspecialchars(getFooterText(), ENT_QUOTES, 'UTF-8') . '</p></div>';
 }
 
-// Footer text (touch the grass before changing, but seriously, respect the efforts and add your own text, while keeping name of engine)
+// Footer text
 function getFooterText() {
     return 'Powered by Hentai CMS';
 }
@@ -81,7 +83,7 @@ $Parsedown = new Parsedown();
 // Block direct access to hentaicms.php
 $requestedFile = $_SERVER['REQUEST_URI'];
 if (preg_match('/\/cms\/hentaicms\.php$/i', $requestedFile)) {
-    hentaiHeader($themeFileForHentaiCMS);
+    hentaiHeader();
     echo '<div class="echo-content"><h1>What are you trying to find here?</h1></div>';
     hentaiFooter();
     exit();
@@ -108,21 +110,21 @@ if (file_exists($maintenanceFile)) {
 }
 
 // Function to render markdown content
-function hentaiShowMarkdown($path, $themeFileForHentaiCMS) {
+function hentaiShowMarkdown($path) {
     global $Parsedown;
     if (file_exists($path)) {
         $content = file_get_contents($path);
         if (empty(trim($content))) {
-            hentaiHeader($themeFileForHentaiCMS);
+            hentaiHeader();
             echo '<div class="echo-content"><h1>Did you make an empty index.md page in "content" folder or what?</h1></div>';
             hentaiFooter();
         } else {
-            hentaiHeader($themeFileForHentaiCMS);
+            hentaiHeader();
             echo '<div class="markdown-content">' . $Parsedown->text($content) . '</div>';
             hentaiFooter();
         }
     } else {
-        hentaiHeader($themeFileForHentaiCMS);
+        hentaiHeader();
         echo '<div class="echo-content"><h1>404 - Page Not Found</h1></div>';
         hentaiFooter();
     }
@@ -130,24 +132,24 @@ function hentaiShowMarkdown($path, $themeFileForHentaiCMS) {
 
 // If maintenance mode is enabled, show the maintenance page
 if ($maintenanceEnabled) {
-    hentaiShowMarkdown($maintenanceFile, $themeFileForHentaiCMS);
+    hentaiShowMarkdown($maintenanceFile);
 } else {
     // Handle home page or specific pages
     if ($safePage === 'home') {
         $homePagePath = $contentDir . '/index.md';
         if (file_exists($homePagePath)) {
-            hentaiShowMarkdown($homePagePath, $themeFileForHentaiCMS);
+            hentaiShowMarkdown($homePagePath);
         } else {
-            hentaiHeader($themeFileForHentaiCMS);
+            hentaiHeader();
             echo '<div class="echo-content"><h1>Where is index.md page in "content" folder?</h1></div>';
             hentaiFooter();
         }
     } elseif (file_exists($path1)) {
-        hentaiShowMarkdown($path1, $themeFileForHentaiCMS);
+        hentaiShowMarkdown($path1);
     } elseif (file_exists($path2)) {
-        hentaiShowMarkdown($path2, $themeFileForHentaiCMS);
+        hentaiShowMarkdown($path2);
     } else {
-        hentaiHeader($themeFileForHentaiCMS);
+        hentaiHeader();
         echo '<div class="echo-content"><h1>404 - Page Not Found</h1></div>';
         hentaiFooter();
     }
