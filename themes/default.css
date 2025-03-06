@@ -1,81 +1,111 @@
-/* Main body styling */
+/* Duotone color scheming */
+:root {
+    --color-blossom: #338618; /* Stark color */
+    --color-fade: #5e5e5e; /* Prominent color */
+    
+    /* Background colors */
+    --color-bg: #f9f9f9;
+    --color-bg-alt: #C7E3BE;
+
+    /* Text color */
+    --color-text: #4a4a4a;
+
+    /* Link colors */
+    --color-link: var(--color-blossom);
+    --color-visited: #bf5af2;
+    --color-hover: #ff453a;
+
+    /* Blockquote */
+    --blockquote-bg: rgba(240, 240, 240, 0.8);
+    --blockquote-border: var(--color-blossom);
+
+    /* Code blocks */
+    --code-bg: var(--color-bg-alt);
+    
+    /* Buttons */
+    --button-bg: var(--color-fade);
+    --button-fg: #ffffff;
+    --button-hover-bg: #444444;
+    --button-active-bg: var(--color-blossom);
+    --button-active-fg: #ffffff;
+    
+    /* Echo box */
+    --echo-bg: rgba(240, 240, 240, 0.9);
+}
+
+/* Base Body */
 body {
-    color: #2c3e50; /* Dark blue-gray text for better readability */
-    background-color: #f8f9fa; /* Light gray background for a clean look */
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Modern font stack */
-    line-height: 1.6; /* Improved readability */
+    background-color: var(--color-bg);
+    color: var(--color-text);
     padding: 2rem;
+    font-family: sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    animation: fadeIn 0.5s ease-in-out; /* Fade animation for the entire page */
 }
 
-/* Horizontal rule styling */
-hr {
-    height: 2px;
-    background-color: #e9ecef; /* Light gray horizontal line */
-    border: none;
-    margin: 2rem 0; /* More spacing for a modern look */
+/* Wrapper */
+.wrapper {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-/* Link styles */
+/* Links */
 a {
-    color: #1a73e8; /* Modern blue for links */
-    text-decoration: none; /* No underline by default */
-    transition: color 0.2s ease, text-decoration 0.2s ease; /* Smooth hover effect */
+    color: var(--color-link);
+    transition: color 0.2s ease;
 }
 
 a:visited {
-    color: #6e40c9; /* Soft purple for visited links */
+    color: var(--color-visited);
 }
 
 a:hover {
-    color: #d93025; /* Modern red for hover */
-    text-decoration: underline; /* Subtle underline on hover */
+    color: var(--color-hover);
+    text-decoration: underline;
 }
 
-a:active {
-    color: #d93025; /* Keep red for active state */
+/* Horizontal Rule */
+hr {
+    background: #e0e0e3;
+    border: none;
+    height: 1px;
+    margin: 2rem 0;
 }
 
-/* Responsive image styling for Markdown-rendered images */
+/* Images */
 img {
-    max-width: 100%; /* Ensure images don't exceed their container's width */
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Remove extra space below images */
-    margin: 1.5rem 0; /* Add vertical spacing */
-    border-radius: 8px; /* Rounded corners for a modern look */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin: 1.5rem auto;
+    display: block;
+    max-width: 90%;
+    animation: fadeIn 0.6s ease-in-out; /* Fade animation for images */
 }
 
-/* Optional: Add media queries for finer control over image sizes */
-@media (max-width: 768px) {
-    img {
-        max-width: 90%; /* Slightly smaller images on smaller screens */
-    }
-}
-
-@media (max-width: 480px) {
-    img {
-        max-width: 80%; /* Even smaller images on very small screens */
-    }
-}
-
-/* Modern blockquote styling (if Markdown uses blockquotes) */
+/* Blockquotes */
 blockquote {
-    color: #6c757d; /* Gray text for quotes */
-    border-left: 4px solid #1a73e8; /* Accent border */
-    margin: 1.5rem 0;
+    color: var(--color-text);
+    background: var(--blockquote-bg);
+    border-left: 4px solid var(--blockquote-border);
     padding: 0.5rem 1rem;
-    background-color: #f8f9fa; /* Light background for contrast */
-    border-radius: 4px; /* Rounded corners */
+    border-radius: 8px;
 }
 
-/* Modern code styling (if Markdown uses code blocks) */
-code {
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    background-color: #e9ecef; /* Light gray background */
+/* Code Blocks */
+code, pre code {
+    font-family: monospace;
+    background: var(--code-bg);
+    color: var(--color-text);
     padding: 0.2rem 0.4rem;
-    border-radius: 4px; /* Rounded corners */
-    font-size: 0.9em;
+    border-radius: 6px;
 }
 
 pre code {
@@ -83,35 +113,122 @@ pre code {
     padding: 1rem;
     margin: 1.5rem 0;
     overflow-x: auto;
-    background-color: #2d2d2d; /* Dark background for code blocks */
-    color: #f8f9fa; /* Light text for contrast */
-    border-radius: 8px; /* Rounded corners */
+    border-radius: 12px;
 }
 
-/* Style for echo-content messages */
+/* Echo Content */
 .echo-content {
-    max-width: 100%; /* Full width on small screens */
-    width: 600px; /* Default width */
+    max-width: 600px;
     margin: 2rem auto;
     padding: 2rem;
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--echo-bg);
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
-    animation: fadeIn 0.4s ease-in-out;
-    backdrop-filter: blur(8px);
+    animation: fadeIn 0.5s ease-in-out; /* Fade animation for echo content */
+}
+
+.echo-content h1,
+.echo-content h2,
+.echo-content h3 {
+    text-align: center;
+}
+
+@media (max-width: 1200px) {
+    .echo-content {
+        width: 85%;
+        padding: 1.5rem;
+    }
 }
 
 @media (max-width: 768px) {
     .echo-content {
-        width: 90%; /* Tablet Screens */
+        width: 90%;
         padding: 1.5rem;
     }
 }
 
 @media (max-width: 480px) {
     .echo-content {
-        width: 95%; /* Mobile Screens */
+        width: 95%;
         padding: 1rem;
+    }
+}
+
+/* Buttons */
+button {
+    background: var(--button-bg);
+    color: var(--button-fg);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+button:hover {
+    background: var(--button-hover-bg);
+    transform: translateY(-1px);
+}
+
+button:active {
+    background: var(--button-active-bg);
+    color: var(--button-active-fg);
+    transform: translateY(0);
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(51, 134, 24, 0.3);
+    color: var(--button-fg);
+}
+
+/* Markdown Styling */
+.markdown {
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: auto;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+    color: var(--color-blossom);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.markdown p {
+    margin-bottom: 1rem;
+}
+
+.markdown ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.markdown ol {
+    list-style-type: decimal;
+    padding-left: 20px;
+}
+
+.markdown pre {
+    background: var(--color-bg-alt);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
