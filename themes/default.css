@@ -2,7 +2,7 @@
 :root {
     --color-blossom: #338618; /* Stark color */
     --color-fade: #5e5e5e; /* Prominent color */
-    
+
     /* Background colors */
     --color-bg: #f9f9f9;
     --color-bg-alt: #C7E3BE;
@@ -21,14 +21,14 @@
 
     /* Code blocks */
     --code-bg: var(--color-bg-alt);
-    
+
     /* Buttons */
     --button-bg: var(--color-fade);
     --button-fg: #ffffff;
     --button-hover-bg: #444444;
     --button-active-bg: var(--color-blossom);
     --button-active-fg: #ffffff;
-    
+
     /* Echo box */
     --echo-bg: rgba(240, 240, 240, 0.9);
 }
@@ -44,7 +44,8 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: left;
-    animation: fadeIn 0.5s ease-in-out; /* Fade animation for the entire page */
+    animation: fadeIn 0.5s ease-in-out;
+    box-sizing: border-box; /* Prevents content from overflowing */
 }
 
 /* Wrapper */
@@ -55,12 +56,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    box-sizing: border-box;
 }
 
 /* Links */
 a {
     color: var(--color-link);
     transition: color 0.2s ease;
+    word-break: break-word; /* Fixes long links like V3 onions */
+    overflow-wrap: break-word;
+    display: inline-block; /* Ensures line-break works cleanly */
+    max-width: 100%;
 }
 
 a:visited {
@@ -87,7 +93,7 @@ img {
     margin: 1.5rem auto;
     display: block;
     max-width: 90%;
-    animation: fadeIn 0.6s ease-in-out; /* Fade animation for images */
+    animation: fadeIn 0.6s ease-in-out;
 }
 
 /* Blockquotes */
@@ -100,19 +106,24 @@ blockquote {
 }
 
 /* Code Blocks */
-code, pre code {
+code,
+pre code {
     font-family: monospace;
     background: var(--code-bg);
     color: var(--color-text);
     padding: 0.2rem 0.4rem;
     border-radius: 6px;
+    word-break: break-word; /* Ensures long links/words break cleanly */
+    white-space: pre-wrap; /* Allows wrapping inside code blocks */
 }
 
-pre code {
-    display: block;
+pre {
+    overflow-x: auto; /* Enables horizontal scroll if necessary */
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
     padding: 1rem;
     margin: 1.5rem 0;
-    overflow-x: auto;
     border-radius: 12px;
 }
 
@@ -125,34 +136,13 @@ pre code {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
-    animation: fadeIn 0.5s ease-in-out; /* Fade animation for echo content */
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 .echo-content h1,
 .echo-content h2,
 .echo-content h3 {
     text-align: center;
-}
-
-@media (max-width: 1200px) {
-    .echo-content {
-        width: 85%;
-        padding: 1.5rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .echo-content {
-        width: 90%;
-        padding: 1.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .echo-content {
-        width: 95%;
-        padding: 1rem;
-    }
 }
 
 /* Buttons */
@@ -202,6 +192,7 @@ button:focus {
 
 .markdown p {
     margin-bottom: 1rem;
+    word-break: break-word; /* Ensure paragraphs wrap long content */
 }
 
 .markdown ul {
@@ -232,3 +223,38 @@ button:focus {
         transform: translateY(0);
     }
 }
+
+/* Mobile Tweaks */
+@media (max-width: 1200px) {
+    .echo-content {
+        width: 85%;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .echo-content {
+        width: 90%;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body,
+    .wrapper,
+    .markdown {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+
+    pre {
+        font-size: 0.9rem; /* Slightly smaller code font for better fit */
+    }
+
+    .echo-content {
+        width: 95%;
+        padding: 1rem;
+    }
+}
+
