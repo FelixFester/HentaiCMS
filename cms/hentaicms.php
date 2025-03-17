@@ -145,7 +145,7 @@ function displayHentaiHeader() {
     echo '<head>';
     echo '<meta charset="UTF-8">';
     echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
-    echo '<link rel="stylesheet" href="sakura.css">';
+    echo '<link rel="stylesheet" href="ヘンタイ CSS フレームワーク.css">';
     echo '<link rel="stylesheet" href="' . htmlspecialchars($themeFile, ENT_QUOTES, 'UTF-8') . '">';
     echo '</head>';
     echo '<body>';
