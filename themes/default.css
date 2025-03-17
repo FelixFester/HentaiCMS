@@ -1,260 +1,307 @@
-/* Duotone color scheming */
+/* Root Theme Variables */
 :root {
-    --color-blossom: #338618; /* Stark color */
-    --color-fade: #5e5e5e; /* Prominent color */
-
-    /* Background colors */
-    --color-bg: #f9f9f9;
-    --color-bg-alt: #C7E3BE;
-
-    /* Text color */
-    --color-text: #4a4a4a;
-
-    /* Link colors */
-    --color-link: var(--color-blossom);
-    --color-visited: #bf5af2;
-    --color-hover: #ff453a;
-
-    /* Blockquote */
-    --blockquote-bg: rgba(240, 240, 240, 0.8);
-    --blockquote-border: var(--color-blossom);
-
-    /* Code blocks */
-    --code-bg: var(--color-bg-alt);
-
-    /* Buttons */
-    --button-bg: var(--color-fade);
-    --button-fg: #ffffff;
-    --button-hover-bg: #444444;
-    --button-active-bg: var(--color-blossom);
-    --button-active-fg: #ffffff;
-
-    /* Echo box */
-    --echo-bg: rgba(240, 240, 240, 0.9);
+  --primary-color: #338618; /* Theme's primary color */
+  --text-color: #4a4a4a;
+  --background-color: #f9f9f9;
+  --border-color: #e0e0e3;
 }
 
-/* Base Body */
+/* General Body Styling */
 body {
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    padding: 2rem;
-    font-family: sans-serif;
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: left;
-    animation: fadeIn 0.5s ease-in-out;
-    box-sizing: border-box; /* Prevents content from overflowing */
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  animation: fadeIn 0.5s ease-in-out;
+  overflow-x: hidden;
 }
 
 /* Wrapper */
 .wrapper {
-    width: 100%;
-    max-width: 800px;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    box-sizing: border-box;
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
 /* Links */
 a {
-    color: var(--color-link);
-    transition: color 0.2s ease;
-    word-break: break-word; /* Fixes long links like V3 onions */
-    overflow-wrap: break-word;
-    display: inline-block; /* Ensures line-break works cleanly */
-    max-width: 100%;
+  color: var(--primary-color);
+  transition: color 0.2s ease;
 }
 
 a:visited {
-    color: var(--color-visited);
+  color: #bf5af2;
 }
 
 a:hover {
-    color: var(--color-hover);
-    text-decoration: underline;
+  color: #ff453a;
+  text-decoration: underline;
 }
 
 /* Horizontal Rule */
 hr {
-    background: #e0e0e3;
-    border: none;
-    height: 1px;
-    margin: 2rem 0;
+  background: var(--border-color);
+  border: none;
+  height: 1px;
+  margin: 2rem 0;
 }
 
-/* Images */
-img {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    margin: 1.5rem auto;
-    display: block;
-    max-width: 90%;
-    animation: fadeIn 0.6s ease-in-out;
+/* Images & Videos */
+img, video {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin: 1.5rem auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  animation: fadeIn 0.6s ease-in-out;
 }
 
 /* Blockquotes */
 blockquote {
-    color: var(--color-text);
-    background: var(--blockquote-bg);
-    border-left: 4px solid var(--blockquote-border);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
+  background: rgba(240, 240, 240, 0.8);
+  border-left: 4px solid var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  font-style: italic;
 }
 
 /* Code Blocks */
-code,
-pre code {
-    font-family: monospace;
-    background: var(--code-bg);
-    color: var(--color-text);
-    padding: 0.2rem 0.4rem;
-    border-radius: 6px;
-    word-break: break-word; /* Ensures long links/words break cleanly */
-    white-space: pre-wrap; /* Allows wrapping inside code blocks */
+code, pre {
+  background-color: #C7E3BE;
+  color: var(--text-color);
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+  font-family: monospace;
+  word-break: break-word;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 pre {
-    overflow-x: auto; /* Enables horizontal scroll if necessary */
-    word-wrap: break-word;
-    white-space: pre-wrap;
-    max-width: 100%;
-    padding: 1rem;
-    margin: 1.5rem 0;
-    border-radius: 12px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 12px;
+}
+
+/* Buttons */
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  background-color: #5e5e5e;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.button:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover {
+  background-color: #444444;
+  transform: translateY(-1px);
+}
+
+.button:active,
+button:active,
+input[type="submit"]:active,
+input[type="reset"]:active,
+input[type="button"]:active {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  transform: translateY(0);
+}
+
+.button:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(51, 134, 24, 0.3);
 }
 
 /* Echo Content */
 .echo-content {
-    max-width: 600px;
-    margin: 2rem auto;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(240, 240, 240, 0.9);
+  border: none;  /* No border in light mode */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Markdown Content */
+.markdown-content {
+  font-size: 1.8rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: auto;
+  word-break: break-word;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.markdown-content p {
+  margin-bottom: 1rem;
+}
+
+/* Ensure markdown links wrap properly */
+.markdown-content a {
+  font-size: inherit;
+  display: inline;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.markdown-content ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.markdown-content ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+.markdown-content pre {
+  background-color: #C7E3BE;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #ddd;
+    --background-color: #121212;
+    --light-gray: #2a2a2a;
+    --code-bg-color: #C7E3BE;
+    --code-text-color: #000000;
+  }
+
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+
+  a {
+    color: #7ec8e3;
+  }
+
+  th {
+    background-color: var(--light-gray);
+  }
+
+  /* Code Blocks in Dark Mode */
+  code,
+  pre {
+    background-color: var(--code-bg-color);
+    color: var(--code-text-color);
+  }
+
+  /* Dark Mode Echo Content Styling */
+  .echo-content {
+    background: transparent;
+    color: var(--text-color);
+    border: 2px solid var(--primary-color);
     padding: 2rem;
-    background: var(--echo-bg);
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    animation: fadeIn 0.5s ease-in-out;
-}
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease-in-out;
+  }
 
-.echo-content h1,
-.echo-content h2,
-.echo-content h3 {
-    text-align: center;
-}
-
-/* Buttons */
-button {
-    background: var(--button-bg);
-    color: var(--button-fg);
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: none;
-}
-
-button:hover {
-    background: var(--button-hover-bg);
-    transform: translateY(-1px);
-}
-
-button:active {
-    background: var(--button-active-bg);
-    color: var(--button-active-fg);
-    transform: translateY(0);
-}
-
-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(51, 134, 24, 0.3);
-    color: var(--button-fg);
-}
-
-/* Markdown Styling */
-.markdown {
-    font-size: 1rem;
-    line-height: 1.6;
-    max-width: 800px;
-    margin: auto;
-}
-
-.markdown h1,
-.markdown h2,
-.markdown h3 {
-    color: var(--color-blossom);
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
-
-.markdown p {
-    margin-bottom: 1rem;
-    word-break: break-word; /* Ensure paragraphs wrap long content */
-}
-
-.markdown ul {
-    list-style-type: disc;
-    padding-left: 20px;
-}
-
-.markdown ol {
-    list-style-type: decimal;
-    padding-left: 20px;
-}
-
-.markdown pre {
-    background: var(--color-bg-alt);
-    padding: 1rem;
-    border-radius: 8px;
-    overflow-x: auto;
+  .echo-content:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.8);
+  }
 }
 
 /* Fade-In Animation */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Mobile Tweaks */
-@media (max-width: 1200px) {
-    .echo-content {
-        width: 85%;
-        padding: 1.5rem;
-    }
-}
-
 @media (max-width: 768px) {
-    .echo-content {
-        width: 90%;
-        padding: 1.5rem;
-    }
+  body {
+    padding: 1rem;
+  }
+  .wrapper {
+    padding: 1rem;
+  }
+  pre {
+    font-size: 0.9rem;
+  }
+  .echo-content {
+    width: 90%;
+    padding: 1rem;
+  }
+  .markdown-content {
+    font-size: 1.6rem;
+  }
 }
 
 @media (max-width: 480px) {
-    body,
-    .wrapper,
-    .markdown {
-        width: 100%;
-        padding: 1rem;
-        box-sizing: border-box;
-    }
-
-    pre {
-        font-size: 0.9rem; /* Slightly smaller code font for better fit */
-    }
-
-    .echo-content {
-        width: 95%;
-        padding: 1rem;
-    }
+  body,
+  .wrapper,
+  .markdown-content {
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  pre {
+    font-size: 0.85rem;
+  }
+  .echo-content {
+    width: 95%;
+    padding: 1rem;
+  }
+  .markdown-content {
+    font-size: 1.5rem;
+  }
 }
 
