@@ -153,7 +153,7 @@ function displayNsfwWarning($path, $Parsedown) {
     echo '</div>';
     echo '<div id="content" style="display: none;">';
     echo '<div class="markdown-content">' . $Parsedown->text(file_get_contents($path)) . '</div>';
-    echo '<div class="footer"><p>' . htmlspecialchars(getHentaiFooterText(), ENT_QUOTES, 'UTF-8') . '</p></div>';
+    echo '<center><div class="footer"><p>' . htmlspecialchars(getHentaiFooterText(), ENT_QUOTES, 'UTF-8') . '</p></div></center>';
     echo '</div>';
     echo '</body></html>';
 }
