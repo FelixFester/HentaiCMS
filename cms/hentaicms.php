@@ -149,7 +149,7 @@ function displayNsfwWarning($path, $Parsedown) {
     echo '<div id="warning" style="text-align: center; padding: 20px;">';
     echo '<h1>NSFW CONTENT WARNING</h1>';
     echo '<p>This page contains adult content. Are you sure you want to proceed?</p>';
-    echo '<button onclick="proceedToPage()">Yes</button> <a href="https://www.youtube.com/watch?v=cd5QuZq5jmg"><button>No</button></a>';
+    echo '<button onclick="proceedToPage()">Yes</button> <a href="index.php"><button>No</button></a>';
     echo '</div>';
     echo '<div id="content" style="display: none;">';
     echo '<div class="markdown-content">' . $Parsedown->text(file_get_contents($path)) . '</div>';
