@@ -24,6 +24,9 @@ Open hentaicms.php, find a line with mentioned NSFW pages and add names of your 
 * 'example.com/index.php?page=nsfw': content/nsfw.md
 * 'example.com/index.php?page=arts/hentai': content/arts/hentai.md
 
+## How to put my website into maintenance?
+Find a line in hentaicms.php that says '$maintenanceEnabled = false;' and instead of "false" put here "true". To edit maintenance page, open maintenance.md in folder "content". Yes, it's very simple.
+
 ## Installation
 To get all latest updates, just download code as .zip archive from GitHub, unpack in folder of your website and done!
 
