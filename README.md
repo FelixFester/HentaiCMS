@@ -19,6 +19,11 @@ Sample URLs and corresponding files loaded shown below:
 * 'example.com/index.php?page=info': content/info.md
 * 'example.com/index.php?page=aboutme/games': content/aboutme/games.md
 
+## How to mark pages as NSFW?
+Open hentaicms.php, find a line with mentioned NSFW pages and add names of your own pages that you would like to mark. Then save and just open them as usually like that:
+* 'example.com/index.php?page=nsfw': content/nsfw.md
+* 'example.com/index.php?page=arts/hentai': content/arts/hentai.md
+
 ## Installation
 To get all latest updates, just download code as .zip archive from GitHub, unpack in folder of your website and done!
 
