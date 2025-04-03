@@ -3,6 +3,7 @@ Flat-file PHP engine that using .md files to show them as pages.
 
 ## Features
 - Themes support. Full support of .css out of box.
+- Default theme support dark mode. To check this out, enable dark mode in your system (Android), switch to dark theme (Windows 10/11, Linux) and etc.
 - Theme switcher. Open settings to select your favourite theme that would work on all pages!
 - Maintenance mode. In hentaicms.php code you can adjust flag to "true" to enable maintenance. And "false" to disable. Maintenance mode also using .md file for it's page.
 - Built-in ability to mark certain pages as NSFW.
