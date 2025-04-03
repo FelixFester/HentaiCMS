@@ -95,7 +95,7 @@ if (preg_match('/\/cms\/hentaicms\.php$/i', $_SERVER['REQUEST_URI'])) {
 $page = isset($_GET['page']) ? preg_replace('/[^a-zA-Z0-9\-\/]/', '', trim($_GET['page'], '/ ')) : 'home';
 
 // Check if the requested page is the maintenance page and not in maintenance mode
-if ($page === 'ouch' && !$maintenanceEnabled) {
+if ($page === 'maintenance' && !$maintenanceEnabled) {
     displayHentaiError('404 - Page Not Found');
     exit();
 }
