@@ -21,9 +21,17 @@ if (strpos($scriptPath, $documentRoot) === 0) {
 define('THEMES_DIR', ROOT_DIR . '/themes');
 define('CONTENT_DIR', ROOT_DIR . '/content');
 define('DEFAULT_THEME', 'default.css');
-define('MAINTENANCE_FILE', CONTENT_DIR . '/maintenance.md');
+define('MAINTENANCE_FILE', CONTENT_DIR . '/ouch.md');
 
 $maintenanceEnabled = false; // Set this to true to enable maintenance mode
+
+// List of pages that should show NSFW warning
+$nsfwPages = [
+    'nsfw-stuff',
+    'arts/hentai',
+    'anime-arts/girl/nsfw',
+    'explicit'
+];
 
 // Security: Disable PHP info exposure
 ini_set('expose_php', 'Off');
@@ -87,7 +95,7 @@ if (preg_match('/\/cms\/hentaicms\.php$/i', $_SERVER['REQUEST_URI'])) {
 $page = isset($_GET['page']) ? preg_replace('/[^a-zA-Z0-9\-\/]/', '', trim($_GET['page'], '/ ')) : 'home';
 
 // Check if the requested page is the maintenance page and not in maintenance mode
-if ($page === 'maintenance' && !$maintenanceEnabled) {
+if ($page === 'ouch' && !$maintenanceEnabled) {
     displayHentaiError('404 - Page Not Found');
     exit();
 }
@@ -104,6 +112,12 @@ if ($page === 'home' && file_exists(CONTENT_DIR . '/index.md')) {
 
 foreach ($markdownPaths as $path) {
     if (file_exists($path)) {
+        // Check if this is an NSFW page and not maintenance.md or index.md
+        $filename = basename($path);
+        if (in_array($page, $nsfwPages) && $filename !== 'maintenance.md' && $filename !== 'index.md') {
+            displayNsfwWarning($path, $Parsedown);
+            exit();
+        }
         displayHentaiMarkdown($path, $Parsedown);
         exit();
     }
@@ -114,6 +128,35 @@ displayHentaiError('404 - Page Not Found');
 // ──────────────────────────────────────────────────────────────
 // Functions
 // ──────────────────────────────────────────────────────────────
+
+function displayNsfwWarning($path, $Parsedown) {
+    global $themeFile;
+    echo '<!DOCTYPE html>';
+    echo '<html lang="en">';
+    echo '<head>';
+    echo '<meta charset="UTF-8">';
+    echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+    echo '<link rel="stylesheet" href="ヘンタイ CSS フレームワーク.css">';
+    echo '<link rel="stylesheet" href="' . htmlspecialchars($themeFile, ENT_QUOTES, 'UTF-8') . '">';
+    echo '<script>';
+    echo 'function proceedToPage() {';
+    echo '  document.getElementById("warning").style.display = "none";';
+    echo '  document.getElementById("content").style.display = "block";';
+    echo '}';
+    echo '</script>';
+    echo '</head>';
+    echo '<body>';
+    echo '<div id="warning" style="text-align: center; padding: 20px;">';
+    echo '<h1>NSFW CONTENT WARNING</h1>';
+    echo '<p>This page contains adult content. Are you sure you want to proceed?</p>';
+    echo '<button onclick="proceedToPage()">Yes</button> <a href="https://www.youtube.com/watch?v=cd5QuZq5jmg"><button>No</button></a>';
+    echo '</div>';
+    echo '<div id="content" style="display: none;">';
+    echo '<div class="markdown-content">' . $Parsedown->text(file_get_contents($path)) . '</div>';
+    echo '<div class="footer"><p>' . htmlspecialchars(getHentaiFooterText(), ENT_QUOTES, 'UTF-8') . '</p></div>';
+    echo '</div>';
+    echo '</body></html>';
+}
 
 function displayHentaiError($message) {
     displayHentaiHeader();
