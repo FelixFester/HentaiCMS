@@ -21,7 +21,7 @@ if (strpos($scriptPath, $documentRoot) === 0) {
 define('THEMES_DIR', ROOT_DIR . '/themes');
 define('CONTENT_DIR', ROOT_DIR . '/content');
 define('DEFAULT_THEME', 'default.css');
-define('MAINTENANCE_FILE', CONTENT_DIR . '/ouch.md');
+define('MAINTENANCE_FILE', CONTENT_DIR . '/maintenance.md');
 
 $maintenanceEnabled = false; // Set this to true to enable maintenance mode
 
