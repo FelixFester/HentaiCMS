@@ -20,6 +20,7 @@ if (strpos($scriptPath, $documentRoot) === 0) {
 
 define('THEMES_DIR', ROOT_DIR . '/themes');
 define('CONTENT_DIR', ROOT_DIR . '/content');
+define('PLUGINS_DIR', ROOT_DIR . '/plugins');
 define('DEFAULT_THEME', 'default.css');
 define('MAINTENANCE_FILE', CONTENT_DIR . '/maintenance.md');
 
@@ -27,10 +28,7 @@ $maintenanceEnabled = false; // Set this to true to enable maintenance mode
 
 // List of pages that should show NSFW warning
 $nsfwPages = [
-    'nsfw-stuff',
-    'arts/hentai',
-    'anime-arts/girl/nsfw',
-    'explicit'
+    'nsfw',
 ];
 
 // Security: Disable PHP info exposure
@@ -64,6 +62,22 @@ $themeFile = in_array($themeCookie, $themes) ? '/themes/' . $themeCookie : '/the
 $themeFile = $themeFile ?: '/themes/' . DEFAULT_THEME;
 
 // ──────────────────────────────────────────────────────────────
+// Plugin System
+// ──────────────────────────────────────────────────────────────
+
+$activePlugins = [];
+if (is_dir(PLUGINS_DIR) && is_readable(PLUGINS_DIR)) {
+    $pluginFiles = array_filter(scandir(PLUGINS_DIR), function ($file) {
+        return is_file(PLUGINS_DIR . '/' . $file) && pathinfo($file, PATHINFO_EXTENSION) === 'php';
+    });
+    
+    foreach ($pluginFiles as $pluginFile) {
+        $pluginName = pathinfo($pluginFile, PATHINFO_FILENAME);
+        $activePlugins[$pluginName] = PLUGINS_DIR . '/' . $pluginFile;
+    }
+}
+
+// ──────────────────────────────────────────────────────────────
 // Maintenance Mode Logic
 // ──────────────────────────────────────────────────────────────
 
@@ -92,6 +106,15 @@ if (preg_match('/\/cms\/hentaicms\.php$/i', $_SERVER['REQUEST_URI'])) {
     exit();
 }
 
+// Check for plugin routes first
+$pluginRequested = isset($_GET['blog']) ? 'blog' : null;
+
+if ($pluginRequested && isset($activePlugins[$pluginRequested])) {
+    include $activePlugins[$pluginRequested];
+    exit();
+}
+
+// Regular page handling
 $page = isset($_GET['page']) ? preg_replace('/[^a-zA-Z0-9\-\/]/', '', trim($_GET['page'], '/ ')) : 'home';
 
 // Check if the requested page is the maintenance page and not in maintenance mode
@@ -148,7 +171,8 @@ function displayNsfwWarning($path, $Parsedown) {
     echo '<body>';
     echo '<div id="warning" style="text-align: center; padding: 20px;">';
     echo '<h1>NSFW CONTENT WARNING</h1>';
-    echo '<p>This page contains adult content. Are you sure you want to proceed?</p>';
+    echo '<p>This page contains adult content. Are you sure you want to proceed?`)</script>
+</p>';
     echo '<button onclick="proceedToPage()">Yes</button> <a href="index.php"><button>No</button></a>';
     echo '</div>';
     echo '<div id="content" style="display: none;">';
@@ -200,6 +224,6 @@ function displayHentaiFooter() {
 }
 
 function getHentaiFooterText() {
-    return 'Powered by Hentai CMS';
+    return 'Powered by Hentai CMS. Find more at felixfester.prtcl.icu';
 }
 ?>
