@@ -3,7 +3,7 @@ Flat-file PHP engine that using .md files to show them as pages. Now support plu
 
 ## Features
 - Plugins support (BETA).
-- Blog plugin (not so beta, but still might be not perfect yet)
+- Blog plugin (not so beta, but still might be not perfect enough yet).
 - Themes support. Full support of .css out of box.
 - Default theme support dark mode. To check this out, enable dark mode in your system (Android), switch to dark theme (Windows 10/11, Linux) and etc.
 - Theme switcher. Open settings to select your favourite theme that would work on all pages!
