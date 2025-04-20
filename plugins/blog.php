@@ -59,10 +59,36 @@ function displayBlogIndex() {
             preg_match('/^# (.+)$/m', $content, $matches);
             $title = $matches[1] ?? $postName;
             
+            // Try to find thumbnail (look for first image in markdown)
+            $thumbnail = '';
+            if (preg_match('/!\[[^\]]*\]\(([^)]+)\)/', $content, $imgMatches)) {
+                $thumbnail = $imgMatches[1];
+            }
+            
+            // Extract description (first paragraph that isn't an image)
+            $description = '';
+            $lines = explode("\n", $content);
+            foreach ($lines as $line) {
+                $trimmed = trim($line);
+                if (!empty($trimmed) && 
+                    !preg_match('/^!?\[.*\]\(.*\)$/', $trimmed) && 
+                    !preg_match('/^#/', $trimmed) &&
+                    empty($description)) {
+                    $description = strip_tags($Parsedown->text($trimmed));
+                    // Limit description length
+                    if (strlen($description) > 150) {
+                        $description = substr($description, 0, 150) . '...';
+                    }
+                    break;
+                }
+            }
+            
             $posts[] = [
                 'name' => $postName,
                 'title' => $title,
-                'file' => $postPath
+                'file' => $postPath,
+                'thumbnail' => $thumbnail,
+                'description' => $description
             ];
         }
     }
@@ -75,12 +101,32 @@ function displayBlogIndex() {
     if (empty($posts)) {
         echo '<p>No blog posts found.</p>';
     } else {
-        echo '<ul>';
+        echo '<div class="blog-posts-list">';
         foreach ($posts as $post) {
-            echo '<li><a href="?blog=' . htmlspecialchars($post['name'], ENT_QUOTES, 'UTF-8') . '">' . 
-                 htmlspecialchars($post['title'], ENT_QUOTES, 'UTF-8') . '</a></li>';
+            echo '<div class="blog-post" style="margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid #eee;">';
+            
+            // Thumbnail if exists
+            if (!empty($post['thumbnail'])) {
+                echo '<div style="float: left; margin-right: 1rem; margin-bottom: 0.5rem;">';
+                echo '<a href="?blog=' . htmlspecialchars($post['name'], ENT_QUOTES, 'UTF-8') . '">';
+                echo '<img src="' . htmlspecialchars($post['thumbnail'], ENT_QUOTES, 'UTF-8') . '" alt="Thumbnail" style="max-width: 150px; max-height: 100px; object-fit: cover;">';
+                echo '</a>';
+                echo '</div>';
+            }
+            
+            // Post title and link
+            echo '<h3 style="margin-top: 0;"><a href="?blog=' . htmlspecialchars($post['name'], ENT_QUOTES, 'UTF-8') . '">' . 
+                 htmlspecialchars($post['title'], ENT_QUOTES, 'UTF-8') . '</a></h3>';
+            
+            // Description
+            if (!empty($post['description'])) {
+                echo '<p>' . htmlspecialchars($post['description'], ENT_QUOTES, 'UTF-8') . '</p>';
+            }
+            
+            echo '<div style="clear: both;"></div>';
+            echo '</div>';
         }
-        echo '</ul>';
+        echo '</div>';
     }
     
     echo '</div>';
