@@ -10,7 +10,7 @@ Feeling creative? Add your own theme in folder `themes`! You can use [settings.p
 
 If you using Hentai CMS on certain hosting on nginx without access to configuration, you still will have 404 error when someone tries to open page through index.php. Also you can add index.php with JavaScript redirection to main page in folders to secure them on such nginx servers as well, if your hosting have such thing when without index.php it directly listing all files in folder so anyone can peek inside your website.
 
-If you have any more questions, feel free to go to GitHub and find here link to Telegram or Instagram channels or QQ chat ID. Just click in footer below.
+If you have any more questions, feel free to go to GitHub and find here link to Discord or Instagram.
 
 ### 💀
 
