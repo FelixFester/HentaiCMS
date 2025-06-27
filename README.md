@@ -40,10 +40,8 @@ To get all latest updates, just download code as .zip archive from GitHub, unpac
 ---
 
 **Have a question?**
-- [Discord server](https://discord.gg/35wCQmp9) (English / Russian / Chinese)
-- [Telegram channel](https://t.me/+fgCDiyU802s1NWZi) (mainly Russian)
+- [Discord server](https://discord.gg/SVjHTFc3Gx) (English / Russian / Chinese)
 - [IG](https://instagram.com/felixfester) (mainly English / Russian)
-- QQ chat group ID: 195194950 (mainly English / Chinese)
 
 ---
 
