@@ -1,1 +1,1 @@
-**Page has been moved. Hentai CMS is now [there](https://codeberg.org/FelixFester/HentaiCMS).**
+**We're moved! Hentai CMS now available [there](https://codeberg.org/FelixFester/HentaiCMS).**
