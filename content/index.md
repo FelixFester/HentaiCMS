@@ -1,10 +1,8 @@
-# Your cool badass website
+# Your cool website
 
 Text about you.
 
 [link 1](#) | [link 2](#)
-
-<audio src='https://soundbuttonslab.com/wp-content/plugins/soundstracks/soundstrackfiles/plankton-dr-jr.mp3' controls><a href='https://soundbuttonslab.com/wp-content/plugins/soundstracks/soundstrackfiles/plankton-dr-jr.mp3'>totally normal audio</a></audio>
 
 [actual link to the page in folder](index.php?page=aboutme/games)
 
