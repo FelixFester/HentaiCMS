@@ -18,9 +18,6 @@ Flat-file PHP engine that using .md files to show them as pages. Fork of [grootc
 - Perfect and lightweight. Engine has been tested on PHP 8.2 and works perfect here! It work even on ancient versions of Google Chrome. (tested in Chrome ~80 on Android)
 - Gently vibe-coded. Main goal was to create "something cool that just works" **in collaboration between human and AIs**. I believe what this is different from what people can call as "AI slop", where AI can be used absolutely mindlessly. While in Hentai CMS almost every change has been tested at least several times manually. So, what you can see here is an efforts done by me with ChatGPT, Grok, DeepSeek and other powerful AI models.
 
-## Demo page
-Yes, it's available now! At least should be - [right here](https://hcmsdemo.zya.me/index.php).
-
 ## How to add content?
 Write your content as markdown files in the 'content' folder.
 Sample URLs and corresponding files loaded shown below:
